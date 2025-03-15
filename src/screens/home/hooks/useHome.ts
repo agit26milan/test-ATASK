@@ -74,7 +74,9 @@ const useHomeHooks = () => {
         fetchListRepo,
         setUserName,
         username,
-        onSelectUsername
+        onSelectUsername, 
+        handleExpandedItem,
+        setListUser
     }
 }
 
