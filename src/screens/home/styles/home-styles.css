@@ -12,3 +12,8 @@
         cursor: pointer;
     }
 }
+
+.info-search {
+    margin-top: 12px;
+    margin-bottom: 12px;
+}

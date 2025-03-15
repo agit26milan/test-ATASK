@@ -5,9 +5,10 @@ import React from 'react'
 import useHome from '@/screens/home/hooks/useHome'
 import ListCard from '@/components/card/ListCard'
 import { useRouter, useSearchParams } from "next/navigation";
+import EmptyState from '@/components/empty-state/empty-state'
 
 const HomePage = () => {
-    const {fetchListRepo, setUserName, username, listUser, onSelectUsername} = useHome()
+    const {fetchListRepo, setUserName, username, listUser, onSelectUsername, setFinalUsername, finalUserName} = useHome()
     const router = useRouter();
     const searchParams = useSearchParams();
     const onTypeSearch = React.useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
@@ -31,6 +32,7 @@ const HomePage = () => {
         if(usernameParam) {
             fetchListRepo(usernameParam)
             setUserName(usernameParam)
+            setFinalUsername(usernameParam)
         }
     }, [searchParams])
     return (
@@ -41,8 +43,11 @@ const HomePage = () => {
             <div className='w-full button-container' >
                 <button onClick={onSearchHandle} className='w-full bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-all"' >Search</button>
             </div>
+            <div className='info-search' >
+                Showing users for {finalUserName}
+            </div>
             <div>
-                {listUser?.length > 0 ? listUser?.map((data, index) => <ListCard repos={data?.repo} onClick={() => onSelectUsername(data?.login || "")} key={index} title={data?.login || ''} isExpand={data?.isExpanded || false} />) : null}
+                {listUser?.length > 0 ? listUser?.map((data, index) => <ListCard repos={data?.repo} onClick={() => onSelectUsername(data?.login || "")} key={index} title={data?.login || ''} isExpand={data?.isExpanded || false} />) : <EmptyState/>}
             </div>
         </div>
     )

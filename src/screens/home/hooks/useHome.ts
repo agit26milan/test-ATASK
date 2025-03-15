@@ -7,7 +7,7 @@ import { setLoading } from "@/utils/loading"
 const useHomeHooks = () => {
     const [listUser, setListUser] = React.useState<UserItems[]>([])
     const [username, setUserName] = React.useState<string>("")
-
+    const [finalUserName, setFinalUsername] = React.useState<string>("")
     const fetchListRepo = async (username:string) => {
         const url = `${GITHUB_USER_API}`
         try {
@@ -76,7 +76,9 @@ const useHomeHooks = () => {
         username,
         onSelectUsername, 
         handleExpandedItem,
-        setListUser
+        setListUser,
+        setFinalUsername,
+        finalUserName
     }
 }
 
