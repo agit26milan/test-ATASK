@@ -15,3 +15,7 @@
     overflow-wrap: break-word; 
     white-space: normal;
 }
+
+.title-repo {
+    width: 80%;
+}

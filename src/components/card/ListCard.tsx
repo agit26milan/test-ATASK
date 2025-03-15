@@ -17,7 +17,7 @@ const ListCard:React.FC<ListCardProps> = (props) => {
     const renderListRepo = (repo: RepoItem, index:number) => (
         <div className='card-repo w-full bg-white border border-gray-200 rounded-2xl' key={index}>
             <div className='flex items-center' >
-                <h3>
+                <h3 className='title-repo' >
                 {repo.full_name}
                 </h3>
                 <div className='flex items-center ml-auto' >
