@@ -1,0 +1,11 @@
+
+.home-container {
+    max-width: 480px;
+    padding: 12px;
+    min-height: 100vh;
+    background-color: white;
+}
+
+.button-container {
+    margin-top: 12px;
+}

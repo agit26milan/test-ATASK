@@ -1,0 +1,17 @@
+.card-container {
+    margin-top: 12px;
+    cursor: pointer;
+    word-wrap: break-word;  
+    overflow-wrap: break-word;
+    white-space: normal;
+}
+
+.card-repo {
+    padding: 12px;
+    margin-top: 12px;
+    width: 90%;
+    margin-left: auto;
+    word-wrap: break-word; 
+    overflow-wrap: break-word; 
+    white-space: normal;
+}
