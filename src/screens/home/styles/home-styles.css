@@ -8,4 +8,7 @@
 
 .button-container {
     margin-top: 12px;
+    button {
+        cursor: pointer;
+    }
 }
