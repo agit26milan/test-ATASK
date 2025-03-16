@@ -44,7 +44,9 @@ describe('useHome hooks should run correctly', () => {
         act(() => {
             result.current.fetchListRepo(username)
         })
+        expect(result.current.isFetching).toBeTruthy()
         await waitFor(() => {
+            expect(result.current.isFetching).toBeFalsy()
             expect(result.current.listUser).toHaveLength(1)
             expect(result.current.listUser).toEqual(mockResponseList)
         })

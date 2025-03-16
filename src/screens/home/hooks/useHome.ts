@@ -8,15 +8,20 @@ const useHomeHooks = () => {
     const [listUser, setListUser] = React.useState<UserItems[]>([])
     const [username, setUserName] = React.useState<string>("")
     const [finalUserName, setFinalUsername] = React.useState<string>("")
+    const [isFetching, setIsFethcing] = React.useState<boolean>(false)
     const fetchListRepo = async (username:string) => {
         const url = `${GITHUB_USER_API}`
         try {
+            setIsFethcing(true)
             setLoading(true)
             const users = await axiosInstance<UserListResponse>({method: 'GET', url, params: {q: username}})
             setListUser(users.data.items || [])
             setLoading(false)
+            setIsFethcing(false)
 
         }catch(error) {
+            setIsFethcing(false)
+            setLoading(false)
             if(isAxiosError(error)) {
                 console.log(error)
             }
@@ -41,7 +46,6 @@ const useHomeHooks = () => {
             if(findDataRepo) {
                 if(!findDataRepo.repo) {
                     setLoading(true)
-                    try {
                     const listRepo = await axiosInstance({method: 'GET', url})
                     const mappingRepo = listUser?.map((data) => {
                         if(data?.login === username) {
@@ -51,18 +55,12 @@ const useHomeHooks = () => {
                     })
                     setListUser(mappingRepo)
                     setLoading(false)
-                    }catch(e) {
-                        setLoading(false)
-                        if(isAxiosError(e)) {
-                            console.log(e, 'erroe')
-                        }
-                    }
                 } else {
                     handleExpandedItem(username)
                 }
             }
          
-        }catch(error) {
+        } catch(error) {
             if(isAxiosError(error)) {
                 console.log({error}, 'error')
             }
@@ -78,7 +76,9 @@ const useHomeHooks = () => {
         handleExpandedItem,
         setListUser,
         setFinalUsername,
-        finalUserName
+        finalUserName,
+        isFetching,
+        setIsFethcing
     }
 }
 

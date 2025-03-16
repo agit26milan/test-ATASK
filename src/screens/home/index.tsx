@@ -8,7 +8,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import EmptyState from '@/components/empty-state/empty-state'
 
 const HomePage = () => {
-    const {fetchListRepo, setUserName, username, listUser, onSelectUsername, setFinalUsername, finalUserName} = useHome()
+    const {fetchListRepo, setUserName, username, listUser, onSelectUsername, setFinalUsername, finalUserName, isFetching} = useHome()
     const router = useRouter();
     const searchParams = useSearchParams();
     const onTypeSearch = React.useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
@@ -35,6 +35,22 @@ const HomePage = () => {
             setFinalUsername(usernameParam)
         }
     }, [searchParams])
+
+    const renderListUser = () => {
+        if(listUser?.length > 0 && !isFetching) {
+            return (
+                <React.Fragment>
+                    {listUser?.map((data, index) => <ListCard repos={data?.repo} onClick={() => onSelectUsername(data?.login || "")} key={index} title={data?.login || ''} isExpand={data?.isExpanded || false} />)}
+                </React.Fragment>
+            )
+
+        }
+        if(listUser?.length <= 0 && finalUserName?.length > 0 && !isFetching) {
+            return <EmptyState />
+        }
+        return null
+    }
+
     return (
         <div >
             <div>
@@ -43,11 +59,13 @@ const HomePage = () => {
             <div className='w-full button-container' >
                 <button onClick={onSearchHandle} className='w-full bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-all"' >Search</button>
             </div>
+            {finalUserName?.length > 0 && (
             <div className='info-search' >
                 Showing users for {finalUserName}
             </div>
+            )}
             <div>
-                {listUser?.length > 0 ? listUser?.map((data, index) => <ListCard repos={data?.repo} onClick={() => onSelectUsername(data?.login || "")} key={index} title={data?.login || ''} isExpand={data?.isExpanded || false} />) : <EmptyState/>}
+               {renderListUser()}
             </div>
         </div>
     )
