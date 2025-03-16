@@ -17,6 +17,25 @@ bun dev
 
 Second Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.  
 
+## Build project
+To build the project, run the following command:  
+
+First.  
+
+```bash
+yarn build
+# or
+npm run build
+
+```  
+Second.  
+
+```bash
+yarn start
+# or
+npm run start
+```
+
 
 ## Project Structure
 app -> for pages.  
